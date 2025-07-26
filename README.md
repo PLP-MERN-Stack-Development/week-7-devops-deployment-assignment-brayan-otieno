@@ -1,78 +1,186 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19982095&assignment_repo_type=AssignmentRepo)
-# Deployment and DevOps for MERN Applications
+# Invoice Generator & Payment Tracker
 
-This assignment focuses on deploying a full MERN stack application to production, implementing CI/CD pipelines, and setting up monitoring for your application.
+A full-stack MERN (MongoDB, Express.js, React, Node.js) application for generating invoices and tracking payments.
 
-## Assignment Overview
+## 🚀 Live Demo
 
-You will:
-1. Prepare your MERN application for production deployment
-2. Deploy the backend to a cloud platform
-3. Deploy the frontend to a static hosting service
-4. Set up CI/CD pipelines with GitHub Actions
-5. Implement monitoring and maintenance strategies
+- **Frontend**: [https://your-frontend.vercel.app](https://your-frontend.vercel.app)
+- **Backend API**: [https://your-backend.onrender.com](https://your-backend.onrender.com)
 
-## Getting Started
+## 🛠 Tech Stack
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week7-Assignment.md` file
-4. Use the provided templates and configuration files as a starting point
+- **Frontend**: React, Vite, TailwindCSS
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB Atlas
+- **Deployment**: Vercel (Frontend), Render (Backend)
+- **CI/CD**: GitHub Actions
+- **Monitoring**: UptimeRobot, Sentry
 
-## Files Included
+## 📋 Prerequisites
 
-- `Week7-Assignment.md`: Detailed assignment instructions
-- `.github/workflows/`: GitHub Actions workflow templates
-- `deployment/`: Deployment configuration files and scripts
-- `.env.example`: Example environment variable templates
-- `monitoring/`: Monitoring configuration examples
+- Node.js (v18 or higher)
+- npm (v9 or higher) or yarn
+- MongoDB Atlas account
+- GitHub account
+- Vercel account (for frontend deployment)
+- Render account (for backend deployment)
 
-## Requirements
+## 🚀 Getting Started
 
-- A completed MERN stack application from previous weeks
-- Accounts on the following services:
-  - GitHub
-  - MongoDB Atlas
-  - Render, Railway, or Heroku (for backend)
-  - Vercel, Netlify, or GitHub Pages (for frontend)
-- Basic understanding of CI/CD concepts
+### 1. Clone the Repository
 
-## Deployment Platforms
+```bash
+git clone https://github.com/your-username/invoice-generator-payment-tracker.git
+cd invoice-generator-payment-tracker
+```
 
-### Backend Deployment Options
-- **Render**: Easy to use, free tier available
-- **Railway**: Developer-friendly, generous free tier
-- **Heroku**: Well-established, extensive documentation
+### 2. Backend Setup
 
-### Frontend Deployment Options
-- **Vercel**: Optimized for React apps, easy integration
-- **Netlify**: Great for static sites, good CI/CD
-- **GitHub Pages**: Free, integrated with GitHub
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
 
-## CI/CD Pipeline
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-The assignment includes templates for setting up GitHub Actions workflows:
-- `frontend-ci.yml`: Tests and builds the React application
-- `backend-ci.yml`: Tests the Express.js backend
-- `frontend-cd.yml`: Deploys the frontend to your chosen platform
-- `backend-cd.yml`: Deploys the backend to your chosen platform
+3. Create a `.env` file based on the example:
+   ```bash
+   cp .env.example .env
+   ```
 
-## Submission
+4. Update the `.env` file with your MongoDB Atlas connection string and other configurations.
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-1. Complete all deployment tasks
-2. Set up CI/CD pipelines with GitHub Actions
-3. Deploy both frontend and backend to production
-4. Document your deployment process in the README.md
-5. Include screenshots of your CI/CD pipeline in action
-6. Add URLs to your deployed applications
+### 3. Frontend Setup
 
-## Resources
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
 
-- [GitHub Actions Documentation](https://docs.github.com/en/actions)
-- [MongoDB Atlas Documentation](https://docs.atlas.mongodb.com/)
-- [Render Documentation](https://render.com/docs)
-- [Railway Documentation](https://docs.railway.app/)
-- [Vercel Documentation](https://vercel.com/docs)
-- [Netlify Documentation](https://docs.netlify.com/) 
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file based on the example:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Update the `.env` file with your backend API URL.
+
+5. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 🚀 Deployment
+
+### Backend Deployment (Render)
+
+1. Push your code to a GitHub repository.
+2. Create a new Web Service on Render.
+3. Connect your GitHub repository.
+4. Configure the following settings:
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `node dist/index.js`
+   - **Environment Variables**: Add all variables from your `.env` file
+
+### Frontend Deployment (Vercel)
+
+1. Push your code to a GitHub repository.
+2. Import your project in Vercel.
+3. Configure the following settings:
+   - **Framework Preset**: Vite
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Environment Variables**: Add all variables from your `.env` file
+
+## 🔄 CI/CD Pipeline
+
+This project uses GitHub Actions for CI/CD. The workflow includes:
+
+- Linting and testing on pull requests
+- Automatic deployment to staging on push to `develop`
+- Automatic deployment to production on push to `main`
+
+### Required Secrets
+
+Add these secrets to your GitHub repository settings:
+
+- `RENDER_DEPLOY_HOOK`: Webhook URL from Render
+- `VERCEL_TOKEN`: Vercel authentication token
+- `VERCEL_ORG_ID`: Vercel organization ID
+- `VERCEL_PROJECT_ID`: Vercel project ID
+
+## 📈 Monitoring
+
+### Uptime Monitoring
+- Backend: Monitored at `/health` endpoint
+- Frontend: Monitored at root URL
+- Set up in UptimeRobot with 5-minute intervals
+
+### Error Tracking
+- Frontend: Sentry integrated via `@sentry/react`
+- Backend: Sentry integrated via `@sentry/node`
+
+## 📂 Project Structure
+
+```
+invoice-generator-payment-tracker/
+├── backend/                 # Express.js backend
+│   ├── src/
+│   │   ├── controllers/     # Route controllers
+│   │   ├── models/          # MongoDB models
+│   │   ├── routes/          # API routes
+│   │   ├── middleware/      # Custom middleware
+│   │   ├── utils/           # Utility functions
+│   │   └── app.js           # Express app setup
+│   ├── .env.example         # Environment variables example
+│   ├── package.json
+│   └── ...
+│
+├── frontend/                # React frontend
+│   ├── public/              # Static files
+│   ├── src/
+│   │   ├── assets/          # Images, fonts, etc.
+│   │   ├── components/      # Reusable components
+│   │   ├── pages/           # Page components
+│   │   ├── services/        # API services
+│   │   ├── store/           # State management
+│   │   ├── utils/           # Utility functions
+│   │   ├── App.jsx          # Main app component
+│   │   └── main.jsx         # Entry point
+│   ├── .env.example         # Environment variables example
+│   ├── package.json
+│   └── ...
+│
+├── .github/
+│   └── workflows/           # GitHub Actions workflows
+│       └── ci-cd.yml        # CI/CD pipeline
+│
+├── .env.example             # Root .env example
+└── README.md                # This file
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Vite](https://vitejs.dev/)
+- [React](https://reactjs.org/)
+- [Express.js](https://expressjs.com/)
+- [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Render](https://render.com/)
+- [Vercel](https://vercel.com/)
